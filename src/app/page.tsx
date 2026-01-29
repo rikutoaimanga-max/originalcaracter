@@ -32,10 +32,15 @@ export default function Home() {
   }, []);
 
   const handleSelect = (categoryId: string, value: string) => {
-    setSelections((prev) => ({
-      ...prev,
-      [categoryId]: value,
-    }));
+    setSelections((prev) => {
+      const newSelections = { ...prev };
+      if (newSelections[categoryId] === value) {
+        delete newSelections[categoryId];
+      } else {
+        newSelections[categoryId] = value;
+      }
+      return newSelections;
+    });
   };
 
   const handleGenerate = async () => {
