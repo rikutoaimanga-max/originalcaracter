@@ -98,7 +98,7 @@ export function ReviewPanel({
                     {isGenerating ? "生成中..." : "キャラクターを生成する"}
                 </Button>
 
-                {/* 三面図生成ボタン (メイン画像がある場合のみ表示) */}
+                {/* キャラクターシート生成ボタン (メイン画像がある場合のみ表示) */}
                 {generatedImage && onGenerateReferenceSheet && (
                     <div className="flex flex-col gap-2">
                         <Button
@@ -107,20 +107,20 @@ export function ReviewPanel({
                             disabled={isGeneratingRefSheet}
                             className="w-full border border-white/10 hover:bg-white/10"
                         >
-                            {isGeneratingRefSheet ? "資料作成中..." : "三面図を生成する (追加)"}
+                            {isGeneratingRefSheet ? "資料作成中..." : "キャラクターシートを生成する (追加)"}
                         </Button>
 
-                        {/* 三面図の表示エリア */}
+                        {/* キャラクターシートの表示エリア */}
                         {referenceSheetImage && (
                             <Card className="w-full relative overflow-hidden glass-card p-1 mt-2">
                                 <div className="relative rounded-lg overflow-hidden bg-black/60">
                                     <img
                                         src={referenceSheetImage}
-                                        alt="Reference Sheet"
+                                        alt="Character Sheet"
                                         className="w-full object-contain"
                                     />
                                     <div className="absolute top-2 left-2 bg-black/50 px-2 py-1 rounded text-xs text-white">
-                                        三面図
+                                        キャラクターシート
                                     </div>
                                 </div>
                             </Card>

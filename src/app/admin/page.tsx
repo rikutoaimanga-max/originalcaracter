@@ -46,7 +46,7 @@ export default function AssetGenerator() {
                 const prompt = `icon of ${item.value}, white background, simple illustration, flat design, high quality, single object, minimal style`;
 
                 // 1. 画像生成 (Base64)
-                const base64Image = await generateCharacterImage(prompt, apiKey);
+                const { base64: base64Image } = await generateCharacterImage(prompt, apiKey);
 
                 if (!base64Image) {
                     throw new Error("画像生成に失敗（Base64が空）");
@@ -99,8 +99,8 @@ export default function AssetGenerator() {
                                 key={cat.id}
                                 onClick={() => setSelectedCategory(cat)}
                                 className={`px-4 py-2 rounded ${selectedCategory?.id === cat.id
-                                        ? "bg-purple-600 text-white"
-                                        : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                                    ? "bg-purple-600 text-white"
+                                    : "bg-gray-800 text-gray-300 hover:bg-gray-700"
                                     }`}
                             >
                                 {cat.label}

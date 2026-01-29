@@ -1,6 +1,6 @@
 "use server";
 
-export async function generateCharacterImage(prompt: string, userApiKey?: string) {
+export async function generateCharacterImage(prompt: string, userApiKey?: string, seed?: number) {
     // ユーザー入力キーを優先し、なければ環境変数を使用
     const apiKey = userApiKey || process.env.GOOGLE_API_KEY;
 
@@ -9,13 +9,13 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
     }
 
     // ユーザー指定のモデル名
-    // コンソールログより、imagen-4.0-generate-001 が利用可能かつ predict メソッドをサポートしていることが確認されました
-    // modelName: "gemini-3-pro-image-preview" は generateContent メソッドのため、エンドポイントが異なります
     const modelName = "imagen-4.0-generate-001";
 
     // Google AI Studio (Generative Language API) のエンドポイント構築
-    // 注意: URL形式が異なる場合があるため、複数のパターンを考慮する必要がありますが、まずは標準的な形式を試行
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:predict?key=${apiKey}`;
+
+    // シード値の決定（指定がなければランダム）
+    const randomSeed = seed ?? Math.floor(Math.random() * 2147483647);
 
     try {
         const response = await fetch(url, {
@@ -33,7 +33,7 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
                 parameters: {
                     sampleCount: 1,
                     aspectRatio: "3:4", // ポートレート向き
-                    // outputOptions: { mimeType: "image/jpeg" } // 必要に応じて
+                    seed: randomSeed,
                 },
             }),
         });
@@ -46,8 +46,7 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
 
         const data = await response.json();
 
-        // レスポンス形式の解析（Imagen on Vertex AI/AI Studioの形式）
-        // 通常は predictions[0].bytesBase64Encoded または同様のパスに画像データがあります
+        // レスポンス形式の解析
         const prediction = data.predictions?.[0];
         const base64Image = prediction?.bytesBase64Encoded || prediction?.mimeType ? prediction.bytesBase64Encoded : null;
 
@@ -56,7 +55,10 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
             throw new Error("No image data found in response");
         }
 
-        return `data:image/png;base64,${base64Image}`;
+        return {
+            base64: `data:image/png;base64,${base64Image}`,
+            seed: randomSeed
+        };
 
     } catch (error) {
         console.error("Generation error:", error);

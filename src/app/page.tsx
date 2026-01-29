@@ -47,6 +47,7 @@ export default function Home() {
   // 三面図用 State
   const [referenceSheetImage, setReferenceSheetImage] = useState<string | null>(null);
   const [isGeneratingRefSheet, setIsGeneratingRefSheet] = useState(false);
+  const [currentSeed, setCurrentSeed] = useState<number | null>(null);
 
   const handleGenerate = async () => {
     if (!apiKey) {
@@ -59,6 +60,7 @@ export default function Home() {
     setGeneratedImage(null);
     setReferenceSheetImage(null); // メイン画像再生成時は三面図もリセット
     setResolvedSelections(null);
+    setCurrentSeed(null);
 
     try {
       // プロンプト構築とランダム値の解決
@@ -98,14 +100,16 @@ export default function Home() {
       // 解決された選択肢をStateに保存
       setResolvedSelections(currentResolved);
 
-      const basePrompt = "A high quality, detailed anime style character illustration, white background, ";
+      const basePrompt = "A high quality, detailed anime style character illustration, white background, front view, full body, ";
       const finalPrompt = basePrompt + promptParts.join(", ") + ", masterpiece, best quality, 8k";
 
       console.log("Generating with prompt:", finalPrompt);
 
       // APIキーを渡して生成
-      const image = await generateCharacterImage(finalPrompt, apiKey);
-      setGeneratedImage(image);
+      const result = await generateCharacterImage(finalPrompt, apiKey);
+      setGeneratedImage(result.base64);
+      setCurrentSeed(result.seed);
+      console.log("Generation seed:", result.seed);
     } catch (error) {
       console.error(error);
       alert("画像の生成に失敗しました。APIキーまたはモデルの設定を確認してください。");
@@ -123,13 +127,14 @@ export default function Home() {
       // 解決済みの選択肢からプロンプトを再構築
       const promptParts = Object.values(resolvedSelections);
 
-      const basePrompt = "concept art, character sheet, three views, front view, side view, back view, full body, white background, anime style, ";
+      const basePrompt = "concept art, character sheet, detailed character design, full body three views (front, side, back), including facial close-ups (front face, side face, back of head), white background, anime style, ";
       const finalPrompt = basePrompt + promptParts.join(", ") + ", masterpiece, best quality, 8k, flat color";
 
-      console.log("Generating Reference Sheet with prompt:", finalPrompt);
+      console.log("Generating Reference Sheet with prompt:", finalPrompt, "Seed:", currentSeed);
 
-      const image = await generateCharacterImage(finalPrompt, apiKey);
-      setReferenceSheetImage(image);
+      // 同じシード値を使って生成（ビジュアルの一貫性を保つため）
+      const result = await generateCharacterImage(finalPrompt, apiKey, currentSeed ?? undefined);
+      setReferenceSheetImage(result.base64);
     } catch (error) {
       console.error(error);
       alert("三面図の生成に失敗しました。");
