@@ -12,15 +12,28 @@ interface ReviewPanelProps {
     generatedImage: string | null;
     isGenerating: boolean;
     onGenerate: () => void;
+    // New props
+    referenceSheetImage?: string | null;
+    isGeneratingRefSheet?: boolean;
+    onGenerateReferenceSheet?: () => void;
 }
 
-export function ReviewPanel({ selections, resolvedSelections, generatedImage, isGenerating, onGenerate }: ReviewPanelProps) {
+export function ReviewPanel({
+    selections,
+    resolvedSelections,
+    generatedImage,
+    isGenerating,
+    onGenerate,
+    referenceSheetImage,
+    isGeneratingRefSheet,
+    onGenerateReferenceSheet
+}: ReviewPanelProps) {
     // 表示すべき選択肢のソース（生成済みなら解決セット、そうでなければ現在の選択）
     // ただし、ユーザーが生成後に選択を変えた場合などを考慮し、
     // 「生成結果の表示モード」と「現在の編集モード」の区別がUI上明確でないため、
     // ここでは「生成された画像がある」場合は解決された値を優先表示するようにします。
     // ※ 厳密には「生成後に変更したら selections を表示」などの制御も考えられますが、
-    //    今回は要望通り「ランダムが何を選択されたかわかるように」するために解決値を表示します。
+    //    今回は要望通り「ランダムが何を選択されたかわかるように」するために解決値が表示されます。
 
     // 生成画像があり、かつ解決セットがある場合はそちらを使用
     const sourceSelections = (generatedImage && resolvedSelections) ? resolvedSelections : selections;
@@ -45,68 +58,102 @@ export function ReviewPanel({ selections, resolvedSelections, generatedImage, is
         <div className="flex flex-col h-full gap-4">
             <h2 className="text-xl font-bold">レビュー</h2>
 
-            {/* メイン生成画像エリア */}
-            <Card className="aspect-[3/4] w-full relative overflow-hidden glass-card flex items-center justify-center p-1">
-                <div className="w-full h-full relative rounded-lg overflow-hidden bg-black/60">
-                    {generatedImage ? (
-                        <img
-                            src={generatedImage}
-                            alt="Generated Character"
-                            className="w-full h-full object-cover"
-                        />
-                    ) : (
-                        <div className="flex flex-col items-center justify-center text-muted-foreground gap-4 p-8 text-center h-full">
-                            <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center">
-                                <ImageIcon className="w-10 h-10 opacity-50" />
+            <div className="flex-1 overflow-y-auto pr-1 flex flex-col gap-4">
+                {/* メイン生成画像エリア */}
+                <Card className="aspect-[3/4] w-full relative overflow-hidden glass-card flex items-center justify-center p-1 shrink-0">
+                    <div className="w-full h-full relative rounded-lg overflow-hidden bg-black/60">
+                        {generatedImage ? (
+                            <img
+                                src={generatedImage}
+                                alt="Generated Character"
+                                className="w-full h-full object-cover"
+                            />
+                        ) : (
+                            <div className="flex flex-col items-center justify-center text-muted-foreground gap-4 p-8 text-center h-full">
+                                <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center">
+                                    <ImageIcon className="w-10 h-10 opacity-50" />
+                                </div>
+                                <p className="text-sm">キャラクターを生成するとここに表示されます</p>
                             </div>
-                            <p className="text-sm">キャラクターを生成するとここに表示されます</p>
-                        </div>
-                    )}
+                        )}
 
-                    {/* 生成中オーバーレイ */}
-                    {isGenerating && (
-                        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-10 flex-col gap-4">
-                            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
-                            <p className="text-sm font-medium animate-pulse text-primary">魔法を詠唱中...</p>
-                        </div>
-                    )}
-                </div>
-            </Card>
-
-            {/* 生成ボタン */}
-            <Button
-                size="lg"
-                className="w-full gap-2 font-bold shadow-lg shadow-primary/20 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 border border-white/10"
-                onClick={onGenerate}
-                disabled={isGenerating || selectedItems.length === 0}
-            >
-                <Wand2 className="w-5 h-5" />
-                {isGenerating ? "生成中..." : "キャラクターを生成する"}
-            </Button>
-
-            {/* 選択済みアイテムリスト */}
-            <div className="flex-1 overflow-y-auto pr-1">
-                <div className="grid gap-3">
-                    {selectedItems.map(({ category, item }) => (
-                        <div key={category} className="bg-white/5 rounded-lg p-2 border border-white/5 flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-md overflow-hidden bg-black/40 flex-shrink-0">
-                                {item.imageSrc ? (
-                                    <img src={item.imageSrc} alt={item.label} className="w-full h-full object-cover" />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">?</div>
-                                )}
+                        {/* 生成中オーバーレイ */}
+                        {isGenerating && (
+                            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-10 flex-col gap-4">
+                                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+                                <p className="text-sm font-medium animate-pulse text-primary">魔法を詠唱中...</p>
                             </div>
-                            <div className="flex flex-col">
-                                <span className="text-xs text-muted-foreground">{category}</span>
-                                <span className="text-sm font-medium">{item.label}</span>
+                        )}
+                    </div>
+                </Card>
+
+                {/* 生成ボタン */}
+                <Button
+                    size="lg"
+                    className="w-full gap-2 font-bold shadow-lg shadow-primary/20 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 border border-white/10 shrink-0"
+                    onClick={onGenerate}
+                    disabled={isGenerating || selectedItems.length === 0}
+                >
+                    <Wand2 className="w-5 h-5" />
+                    {isGenerating ? "生成中..." : "キャラクターを生成する"}
+                </Button>
+
+                {/* 三面図生成ボタン (メイン画像がある場合のみ表示) */}
+                {generatedImage && onGenerateReferenceSheet && (
+                    <div className="flex flex-col gap-2">
+                        <Button
+                            variant="secondary"
+                            onClick={onGenerateReferenceSheet}
+                            disabled={isGeneratingRefSheet}
+                            className="w-full border border-white/10 hover:bg-white/10"
+                        >
+                            {isGeneratingRefSheet ? "資料作成中..." : "三面図を生成する (追加)"}
+                        </Button>
+
+                        {/* 三面図の表示エリア */}
+                        {referenceSheetImage && (
+                            <Card className="w-full relative overflow-hidden glass-card p-1 mt-2">
+                                <div className="relative rounded-lg overflow-hidden bg-black/60">
+                                    <img
+                                        src={referenceSheetImage}
+                                        alt="Reference Sheet"
+                                        className="w-full object-contain"
+                                    />
+                                    <div className="absolute top-2 left-2 bg-black/50 px-2 py-1 rounded text-xs text-white">
+                                        三面図
+                                    </div>
+                                </div>
+                            </Card>
+                        )}
+                    </div>
+                )}
+
+
+                {/* 選択済みアイテムリスト */}
+                <div className="mt-2">
+                    <h3 className="text-sm font-medium text-muted-foreground mb-2">選択中のパーツ</h3>
+                    <div className="grid gap-3">
+                        {selectedItems.map(({ category, item }) => (
+                            <div key={category} className="bg-white/5 rounded-lg p-2 border border-white/5 flex items-center gap-3">
+                                <div className="w-12 h-12 rounded-md overflow-hidden bg-black/40 flex-shrink-0">
+                                    {item.imageSrc ? (
+                                        <img src={item.imageSrc} alt={item.label} className="w-full h-full object-cover" />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">?</div>
+                                    )}
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-xs text-muted-foreground">{category}</span>
+                                    <span className="text-sm font-medium">{item.label}</span>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                    {selectedItems.length === 0 && (
-                        <div className="text-center text-muted-foreground text-sm py-8">
-                            まだ何も選択されていません
-                        </div>
-                    )}
+                        ))}
+                        {selectedItems.length === 0 && (
+                            <div className="text-center text-muted-foreground text-sm py-8">
+                                まだ何も選択されていません
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </div>

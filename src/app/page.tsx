@@ -43,6 +43,11 @@ export default function Home() {
     });
   };
 
+
+  // 三面図用 State
+  const [referenceSheetImage, setReferenceSheetImage] = useState<string | null>(null);
+  const [isGeneratingRefSheet, setIsGeneratingRefSheet] = useState(false);
+
   const handleGenerate = async () => {
     if (!apiKey) {
       alert("APIキーが設定されていません。右上の設定ボタンからキーを入力してください。");
@@ -52,6 +57,7 @@ export default function Home() {
 
     setIsGenerating(true);
     setGeneratedImage(null);
+    setReferenceSheetImage(null); // メイン画像再生成時は三面図もリセット
     setResolvedSelections(null);
 
     try {
@@ -105,6 +111,30 @@ export default function Home() {
       alert("画像の生成に失敗しました。APIキーまたはモデルの設定を確認してください。");
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  // 三面図生成ハンドラ
+  const handleGenerateReferenceSheet = async () => {
+    if (!apiKey || !resolvedSelections) return;
+
+    setIsGeneratingRefSheet(true);
+    try {
+      // 解決済みの選択肢からプロンプトを再構築
+      const promptParts = Object.values(resolvedSelections);
+
+      const basePrompt = "concept art, character sheet, three views, front view, side view, back view, full body, white background, anime style, ";
+      const finalPrompt = basePrompt + promptParts.join(", ") + ", masterpiece, best quality, 8k, flat color";
+
+      console.log("Generating Reference Sheet with prompt:", finalPrompt);
+
+      const image = await generateCharacterImage(finalPrompt, apiKey);
+      setReferenceSheetImage(image);
+    } catch (error) {
+      console.error(error);
+      alert("三面図の生成に失敗しました。");
+    } finally {
+      setIsGeneratingRefSheet(false);
     }
   };
 
@@ -162,6 +192,9 @@ export default function Home() {
             generatedImage={generatedImage}
             isGenerating={isGenerating}
             onGenerate={handleGenerate}
+            referenceSheetImage={referenceSheetImage}
+            isGeneratingRefSheet={isGeneratingRefSheet}
+            onGenerateReferenceSheet={handleGenerateReferenceSheet}
           />
         </div>
       </div>
