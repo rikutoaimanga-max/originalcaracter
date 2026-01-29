@@ -190,20 +190,20 @@ export const categories: Category[] = [
             { id: "sailor_hat", label: "セーラーハット", value: "sailor hat", imageSrc: "/images/hat/セーラーハット.png" },
             { id: "cowboy_hat", label: "カウボーイ", value: "cowboy hat", imageSrc: "/images/hat/カウボーイハット.png" },
             { id: "pirate_hat", label: "海賊帽", value: "pirate hat", imageSrc: "/images/hat/海賊帽.jpg" },
-            { id: "witch_hat", label: "魔女の帽子", value: "witch hat", imageSrc: "/images/hat/witch_hat.png" },
+
             { id: "cat_hat", label: "猫耳帽子", value: "cat hat", imageSrc: "/images/hat/猫帽子.png" },
             { id: "helmet", label: "ヘルメット", value: "helmet", imageSrc: "/images/hat/バイクヘルメット.png" },
             { id: "crown", label: "王冠", value: "crown", imageSrc: "/images/hat/王冠.png" },
-            { id: "tiara", label: "ティアラ", value: "tiara", imageSrc: "/images/hat/tiara.png" },
-            { id: "maid_headdress", label: "メイドブリム", value: "maid headdress", imageSrc: "/images/hat/maid_headdress.png" },
-            { id: "hair_ribbon", label: "リボン", value: "hair ribbon", imageSrc: "/images/hat/hair_ribbon.png" },
+            { id: "tiara", label: "ティアラ", value: "tiara", imageSrc: "/images/hat/ティアラ.png" },
+
+            { id: "hair_ribbon", label: "リボン", value: "hair ribbon", imageSrc: "/images/hat/髪リボン.png" },
             { id: "papakha", label: "パパーハ", value: "papakha", imageSrc: "/images/hat/パパーハ.png" },
             { id: "ushanka", label: "ウシャンカ", value: "ushanka", imageSrc: "/images/hat/ウシャンカ.png" },
             { id: "turban", label: "ターバン", value: "turban", imageSrc: "/images/hat/ターバン.png" },
-            { id: "fox_mask", label: "狐面", value: "fox mask on head", imageSrc: "/images/hat/fox_mask.png" },
+
             // 追加分：その他・特殊
             { id: "fur_hat", label: "ファーハット", value: "fur hat", imageSrc: "/images/hat/ファーハット.png" },
-            { id: "nightcap", label: "ナイトキャップ", value: "nightcap", imageSrc: "/images/hat/nightcap.png" },
+
             { id: "picture_hat", label: "ピクチャーハット", value: "picture hat", imageSrc: "/images/hat/ピクチャーハット.png" },
             { id: "cavalier_hat", label: "カヴァリエハット", value: "cavalier hat", imageSrc: "/images/hat/カヴァリエハット　羽根付き広つば帽, 貴族帽.png" },
             { id: "mini_top_hat", label: "ミニシルクハット", value: "mini top hat", imageSrc: "/images/hat/小さいシルクハット.png" },
@@ -225,10 +225,7 @@ export const categories: Category[] = [
             { id: "hijab", label: "ヒジャブ", value: "hijab", imageSrc: "/images/hat/ヒジャブ.png" },
             { id: "sombrero", label: "ソンブレロ", value: "sombrero", imageSrc: "/images/hat/ソンブレロ.png" },
             // イベント・ファンタジー
-            { id: "party_hat", label: "パーティーハット", value: "party hat", imageSrc: "/images/hat/party_hat.png" },
-            { id: "santa_hat", label: "サンタ帽", value: "santa hat", imageSrc: "/images/hat/santa_hat.png" },
-            { id: "pumpkin_hat", label: "カボチャ帽子", value: "pumpkin hat", imageSrc: "/images/hat/pumpkin_hat.png" },
-            { id: "wizard_hat", label: "魔法使い帽子", value: "wizard hat", imageSrc: "/images/hat/wizard_hat.png" },
+
             // 動物・ヘルメット・その他
             { id: "bear_hat", label: "クマ帽子", value: "bear hat", imageSrc: "/images/hat/クマ帽子.png" },
             { id: "dog_hat", label: "犬帽子", value: "dog hat", imageSrc: "/images/hat/犬帽子.png" },
@@ -237,11 +234,11 @@ export const categories: Category[] = [
             { id: "rabbit_hat", label: "ウサギ帽子", value: "rabbit hat", imageSrc: "/images/hat/うさぎ帽子.jpg" },
             { id: "bicycle_helmet", label: "自転車メット", value: "bicycle helmet", imageSrc: "/images/hat/自転車ヘルメット.png" },
             { id: "football_helmet", label: "アメフトメット", value: "football helmet", imageSrc: "/images/hat/フットボールヘルメット.png" },
-            { id: "pilot_helmet", label: "パイロットメット", value: "pilot helmet", imageSrc: "/images/hat/pilot_helmet.png" },
+
             { id: "astronaut_helmet", label: "宇宙飛行士", value: "astronaut helmet", imageSrc: "/images/hat/宇宙飛行士ヘルメット.png" },
             { id: "hard_hat", label: "ヘルメット(作業)", value: "hard hat", imageSrc: "/images/hat/工事用ヘルメット.png" },
             { id: "horned_helmet", label: "角付きメット", value: "horned helmet", imageSrc: "/images/hat/角付きヘルメット.png" },
-            { id: "headband", label: "ヘッドバンド", value: "headband", imageSrc: "/images/hat/headband.png" },
+            { id: "headband", label: "ヘッドバンド", value: "headband", imageSrc: "/images/hat/ヘッドバンド.png" },
             { id: "hachimaki", label: "鉢巻", value: "hachimaki", imageSrc: "/images/hat/hachimaki.png" },
             { id: "headscarf", label: "ヘッドスカーフ", value: "headscarf", imageSrc: "/images/hat/ヘッドスカーフ.png" },
             { id: "bandana", label: "バンダナ", value: "bandana", imageSrc: "/images/hat/バンダナ.png" },

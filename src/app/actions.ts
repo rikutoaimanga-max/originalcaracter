@@ -33,7 +33,6 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
                 parameters: {
                     sampleCount: 1,
                     aspectRatio: "3:4", // ポートレート向き
-                    seed: randomSeed,
                 },
             }),
         });
