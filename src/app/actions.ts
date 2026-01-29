@@ -63,3 +63,27 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
         throw error;
     }
 }
+
+import fs from "fs/promises";
+import path from "path";
+
+export async function saveImageAction(base64Data: string, relativePath: string) {
+    try {
+        // データURLプレフィックスを除去
+        const base64Content = base64Data.replace(/^data:image\/\w+;base64,/, "");
+        const buffer = Buffer.from(base64Content, "base64");
+
+        const publicDir = path.join(process.cwd(), "public");
+        const fullPath = path.join(publicDir, relativePath);
+
+        // ディレクトリが存在するか確認し、なければ作成
+        const dir = path.dirname(fullPath);
+        await fs.mkdir(dir, { recursive: true });
+
+        await fs.writeFile(fullPath, buffer);
+        return { success: true, path: relativePath };
+    } catch (error) {
+        console.error("Error saving image:", error);
+        return { success: false, error: String(error) };
+    }
+}
