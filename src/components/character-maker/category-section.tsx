@@ -44,7 +44,7 @@ export function CategorySection({ category, selectedItemId, onSelect, defaultOpe
                     isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                 )}
             >
-                <div className="overflow-hidden">
+                <div className="overflow-x-hidden overflow-y-auto max-h-[400px]">
                     <div className="p-4 pt-0 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                         {category.items.map((item) => (
                             <SelectionCard
