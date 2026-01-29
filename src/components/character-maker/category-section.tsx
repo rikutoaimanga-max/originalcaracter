@@ -45,7 +45,7 @@ export function CategorySection({ category, selectedItemId, onSelect, defaultOpe
                 )}
             >
                 <div className="overflow-x-hidden overflow-y-auto max-h-[400px]">
-                    <div className="p-4 pt-0 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                    <div className="px-4 pt-0 pb-12 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-3">
                         {category.items.map((item) => (
                             <SelectionCard
                                 key={item.id}
