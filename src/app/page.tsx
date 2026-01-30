@@ -12,7 +12,7 @@ import { Settings } from "lucide-react";
 
 export default function Home() {
   const [selections, setSelections] = useState<Record<string, string>>({});
-  const [selections, setSelections] = useState<Record<string, string>>({});
+
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [resolvedSelections, setResolvedSelections] = useState<Record<string, string> | null>(null);
@@ -129,7 +129,7 @@ export default function Home() {
         <div>
           <div className="flex items-center gap-4">
             <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent w-fit">
-              Original Character Maker
+              Original Character Maker (v2)
             </h1>
             <Button
               variant="ghost"
