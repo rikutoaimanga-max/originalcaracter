@@ -22,9 +22,18 @@ export function SelectionCard({ item, isSelected, onSelect }: SelectionCardProps
             <div className="relative w-full aspect-square overflow-hidden bg-white/5">
                 {item.imageSrc ? (
                     <img
-                        src={item.imageSrc}
+                        src={encodeURI(item.imageSrc)}
                         alt={item.label}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        onError={(e) => {
+                            console.error(`Failed to load image: ${item.imageSrc}`, e);
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.parentElement?.classList.add('flex', 'items-center', 'justify-center');
+                            const fallback = document.createElement('div');
+                            fallback.className = "text-muted-foreground text-xs p-1 text-center";
+                            fallback.innerText = "Img Err";
+                            e.currentTarget.parentElement?.appendChild(fallback);
+                        }}
                     />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs">

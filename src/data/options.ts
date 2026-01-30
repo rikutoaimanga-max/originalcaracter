@@ -1,15 +1,21 @@
-export type OptionItem = {
+export interface OptionItem {
     id: string;
     label: string;
-    value: string; // プロンプトに使用する英語
-    imageSrc?: string; // 表示用画像のパス
+    value: string;
+    imageSrc: string;
     description?: string;
-};
+    gender?: "male" | "female" | "both"; // 性別によるフィルタリング用
+}
 
-export type Category = {
+export interface Category {
     id: string;
     label: string;
     items: OptionItem[];
+}
+
+export const initialSelections = {
+    race: "human",
+    gender: "female", // デフォルト性別
 };
 
 // 共通のランダム項目定義
@@ -17,7 +23,7 @@ const randomOption: OptionItem = {
     id: "random",
     label: "ランダム",
     value: "random",
-    imageSrc: "/images/random.png",
+    imageSrc: "/images/ui/random_icon.png", // 専用アイコンがあれば差し替え
     description: "おまかせ"
 };
 
@@ -87,12 +93,76 @@ export const categories: Category[] = [
         label: "髪型",
         items: [
             randomOption,
-            { id: "long", label: "ロング", value: "long hair", imageSrc: "https://placehold.co/400x400/png?text=Long" },
-            { id: "short", label: "ショート", value: "short hair", imageSrc: "https://placehold.co/400x400/png?text=Short" },
-            { id: "twintails", label: "ツインテール", value: "twintails", imageSrc: "https://placehold.co/400x400/png?text=Twin" },
-            { id: "ponytail", label: "ポニーテール", value: "ponytail", imageSrc: "https://placehold.co/400x400/png?text=Pony" },
-            { id: "bob", label: "ボブ", value: "bob cut", imageSrc: "https://placehold.co/400x400/png?text=Bob" },
-            { id: "braid", label: "おさげ", value: "braid", imageSrc: "https://placehold.co/400x400/png?text=Braid" },
+            { id: "straight", label: "ストレートヘア", value: "straight hair", imageSrc: "/images/hair_style/ストレートヘア.png", gender: "both" },
+            { id: "short_bangs", label: "短い前髪", value: "short bangs", imageSrc: "/images/hair_style/短い前髪.png", gender: "both" },
+            { id: "long_bangs", label: "長い前髪", value: "long bangs", imageSrc: "/images/hair_style/長い前髪.png", gender: "female" },
+            { id: "sotohane", label: "外はね", value: "flipped out hair", imageSrc: "/images/hair_style/外はね.png", gender: "female" },
+            { id: "wave", label: "ウェーブヘア", value: "wavy hair", imageSrc: "/images/hair_style/ウェーブヘア.png", gender: "female" },
+
+            { id: "bangs_parted_2", label: "2ヶ所で分けた前髪", value: "parted bangs", imageSrc: "/images/hair_style/2ヶ所で分けた前髪.png", gender: "female" },
+            { id: "osage", label: "おさげ", value: "braid", imageSrc: "/images/hair_style/おさげ.png", gender: "female" },
+            { id: "odango", label: "お団子", value: "hair bun", imageSrc: "/images/hair_style/お団子.png", gender: "female" },
+            { id: "haneta_maegami", label: "はねた前髪", value: "flipped hair bangs", imageSrc: "/images/hair_style/はねた前髪.png", gender: "female" },
+            { id: "pattsun", label: "ぱっつん", value: "blunt bangs", imageSrc: "/images/hair_style/ぱっつん.png", gender: "female" },
+            { id: "asymmetry", label: "アシンメトリ", value: "asymmetrical hair", imageSrc: "/images/hair_style/アシンメトリ.png", gender: "female" },
+            { id: "ahoge", label: "アホ毛", value: "ahoge", imageSrc: "/images/hair_style/アホ毛.png", gender: "both" },
+            { id: "antenna", label: "アンテナヘア", value: "antenna hair", imageSrc: "/images/hair_style/アンテナヘア.png", gender: "both" },
+            { id: "arched_bangs", label: "アーチ状の前髪", value: "arched bangs", imageSrc: "/images/hair_style/アーチ状の前髪.png", gender: "female" },
+            { id: "wavy", label: "ウェーブヘア", value: "wavy hair", imageSrc: "/images/hair_style/ウェーブヘア.png", gender: "female" },
+            { id: "crown_braid", label: "クラウンブレイド", value: "crown braid", imageSrc: "/images/hair_style/クラウンブレイド.png", gender: "female" },
+            { id: "cornrows", label: "コーンロウ", value: "cornrows", imageSrc: "/images/hair_style/コーンロウ.png", gender: "both" },
+            { id: "side_twintails", label: "サイドツインテ―ル", value: "side twintails", imageSrc: "/images/hair_style/サイドツインテ―ル.png", gender: "female" },
+            { id: "side_bun", label: "サイドバン", value: "side bun", imageSrc: "/images/hair_style/サイドバン.png", gender: "female" },
+            { id: "side_braid", label: "サイドブレイド", value: "side braid", imageSrc: "/images/hair_style/サイドブレイド.png", gender: "female" },
+            { id: "side_pony", label: "サイドポニー", value: "side ponytail", imageSrc: "/images/hair_style/サイドポニー.png", gender: "female" },
+            { id: "short_twintails", label: "ショートツインテ―ル", value: "short twintails", imageSrc: "/images/hair_style/ショートツインテ―ル.png", gender: "female" },
+            { id: "see_through_bangs", label: "シースルーバング", value: "see-through bangs", imageSrc: "/images/hair_style/シースルーバング.png", gender: "female" },
+            { id: "straight", label: "ストレートヘア", value: "straight hair", imageSrc: "/images/hair_style/ストレートヘア.png", gender: "female" },
+            { id: "center_bangs_droop", label: "センターに垂れた前髪", value: "bangs, center hair", imageSrc: "/images/hair_style/センターに垂れた前髪.png", gender: "female" },
+            { id: "center_part", label: "センター分け", value: "center parting", imageSrc: "/images/hair_style/センター分け.png", gender: "both" },
+            { id: "twintails", label: "ツインテール", value: "twintails", imageSrc: "/images/hair_style/ツインテール.png", gender: "female" },
+            { id: "drill_hair", label: "ドリルヘア", value: "drill hair", imageSrc: "/images/hair_style/ドリルヘア.png", gender: "female" },
+            { id: "dreadlocks", label: "ドレッドロック", value: "dreadlocks", imageSrc: "/images/hair_style/ドレッドロック.png", gender: "both" },
+            { id: "high_twintails", label: "ハイツインテ―ル", value: "high twintails", imageSrc: "/images/hair_style/ハイツインテ―ル.png", gender: "female" },
+            { id: "high_bun", label: "ハイバン", value: "high bun", imageSrc: "/images/hair_style/ハイバン.png", gender: "female" },
+            { id: "high_ponytail", label: "ハイポニーテール", value: "high ponytail", imageSrc: "/images/hair_style/ハイポニーテール.png", gender: "female" },
+            { id: "heart_ahoge", label: "ハートアホ毛", value: "heart ahoge", imageSrc: "/images/hair_style/ハートアホ毛.png", gender: "female" },
+            { id: "half_up", label: "ハーフアップ", value: "half updo", imageSrc: "/images/hair_style/ハーフアップ.png", gender: "female" },
+            { id: "half_up_braid", label: "ハーフアップブレイド", value: "half up braid", imageSrc: "/images/hair_style/ハーフアップブレイド.png", gender: "female" },
+            { id: "pinned_bangs", label: "ピン留め前髪", value: "pinned bangs", imageSrc: "/images/hair_style/ピン留め前髪.png", gender: "female" },
+            { id: "french_braid", label: "フレンチブレイド", value: "french braid", imageSrc: "/images/hair_style/フレンチブレイド.png", gender: "female" },
+            { id: "hair_bun", label: "ヘアバン", value: "hair bun", imageSrc: "/images/hair_style/ヘアバン.png", gender: "female" },
+            { id: "ponytail", label: "ポニーテール", value: "ponytail", imageSrc: "/images/hair_style/ポニーテール.png", gender: "female" },
+            { id: "ringlets", label: "リングレット", value: "ringlets", imageSrc: "/images/hair_style/リングレット.png", gender: "female" },
+            { id: "low_twintails", label: "ローツインテール", value: "low twintails", imageSrc: "/images/hair_style/ローツインテール.png", gender: "female" },
+            { id: "low_bun", label: "ローバン", value: "low bun", imageSrc: "/images/hair_style/ローバン.png", gender: "female" },
+            { id: "low_ponytail", label: "ローポニーテール", value: "low ponytail", imageSrc: "/images/hair_style/ローポニーテール.png", gender: "female" },
+            { id: "braid", label: "三つ編み", value: "braid", imageSrc: "/images/hair_style/三つ編み.png", gender: "female" },
+            { id: "braided_twintails", label: "三つ編みツインテール", value: "braided twintails", imageSrc: "/images/hair_style/三つ編みツインテール.png", gender: "female" },
+            { id: "single_braid", label: "三つ編み（1本）", value: "single braid", imageSrc: "/images/hair_style/三つ編み（1本）.png", gender: "female" },
+            { id: "multiple_braids", label: "三つ編み（複数）", value: "multiple braids", imageSrc: "/images/hair_style/三つ編み（複数）.png", gender: "female" },
+            { id: "hair_between_eyes", label: "両目の間の髪", value: "hair between eyes", imageSrc: "/images/hair_style/両目の間の髪.png", gender: "female" },
+            { id: "crossed_bangs", label: "交差した前髪", value: "crossed bangs", imageSrc: "/images/hair_style/交差した前髪.png", gender: "female" },
+            { id: "braided_bangs", label: "前髪に編み込み", value: "braided bangs", imageSrc: "/images/hair_style/前髪に編み込み.png", gender: "female" },
+            { id: "moving_ahoge", label: "動くアホ毛", value: "ahoge, moving", imageSrc: "/images/hair_style/動くアホ毛.png", gender: "both" },
+            { id: "sotohane_2", label: "外はね", value: "flipped out hair", imageSrc: "/images/hair_style/外はね.png", gender: "female" },
+            { id: "hime_cut", label: "姫カット", value: "hime cut", imageSrc: "/images/hair_style/姫カット.png", gender: "female" },
+            { id: "tied_back", label: "後ろにまとめる", value: "tied back hair", imageSrc: "/images/hair_style/後ろにまとめる.png", gender: "female" },
+            { id: "swept_back", label: "後ろに流した髪", value: "swept back hair", imageSrc: "/images/hair_style/後ろに流した髪.png", gender: "female" },
+            { id: "diagonal_bangs", label: "斜めの前髪", value: "diagonal bangs", imageSrc: "/images/hair_style/斜めの前髪.png", gender: "female" },
+            { id: "colored_ahoge", label: "染めアホ毛", value: "colored ahoge", imageSrc: "/images/hair_style/染めアホ毛.png", gender: "female" },
+            { id: "swept_bangs", label: "流した前髪", value: "swept bangs", imageSrc: "/images/hair_style/流した前髪.png", gender: "female" },
+            { id: "hair_over_one_eye", label: "片目にかかる髪", value: "hair over one eye", imageSrc: "/images/hair_style/片目にかかる髪.png", gender: "female" },
+            { id: "hair_over_eyes", label: "目にかかる髪", value: "hair over eyes", imageSrc: "/images/hair_style/目にかかる髪.png", gender: "both" },
+            { id: "short_bangs_2", label: "短い前髪", value: "short bangs", imageSrc: "/images/hair_style/短い前髪.png", gender: "female" },
+            { id: "braided_bun", label: "編み込みバン", value: "braided bun", imageSrc: "/images/hair_style/編み込みバン.png", gender: "female" },
+            { id: "braided_pony", label: "編み込みポニー", value: "braided ponytail", imageSrc: "/images/hair_style/編み込みポニー.png", gender: "female" },
+            { id: "long_bangs_2", label: "長い前髪", value: "long bangs", imageSrc: "/images/hair_style/長い前髪.png", gender: "female" },
+            { id: "side_tufts", label: "頭の側面から伸びる毛束", value: "side tufts", imageSrc: "/images/hair_style/頭の側面から伸びる毛束.png", gender: "female" },
+
+            { id: "man_short", label: "短髪(男)", value: "short hair, masculine", imageSrc: "/images/hair_style/man_short.png", gender: "male" },
+            { id: "man_wolf", label: "ウルフ(男)", value: "wolf cut, masculine", imageSrc: "/images/hair_style/man_wolf.png", gender: "male" },
+            { id: "man_slicked", label: "オールバック", value: "slicked back hair", imageSrc: "/images/hair_style/man_slicked.png", gender: "male" },
         ],
     },
     {
