@@ -43,6 +43,19 @@ export default function Home() {
     });
   };
 
+  const handleRandomAll = () => {
+    const newSelections: Record<string, string> = {};
+    categories.forEach((cat) => {
+      // random以外の選択肢を取得
+      const validItems = cat.items.filter((item) => item.id !== "random");
+      if (validItems.length > 0) {
+        const randomItem = validItems[Math.floor(Math.random() * validItems.length)];
+        newSelections[cat.id] = randomItem.value;
+      }
+    });
+    setSelections(newSelections);
+  };
+
 
   const handleGenerate = async () => {
     if (!apiKey) {
@@ -63,7 +76,7 @@ export default function Home() {
           const selectedValue = selections[cat.id];
 
           // 未選択の場合はスキップ（あるいは必須にするならエラー）
-          if (!selectedValue) return null;
+          if (selectedValue === undefined || selectedValue === null) return null;
 
           // "random" が選択されている場合、そのカテゴリの選択肢からランダムに選ぶ
           if (selectedValue === "random") {
@@ -113,9 +126,14 @@ export default function Home() {
     <div className="container max-w-7xl mx-auto p-4 md:p-6 lg:p-8 h-screen flex flex-col gap-6">
       <header className="flex-none flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent w-fit">
-            Original Character Maker
-          </h1>
+          <div className="flex items-center gap-4">
+            <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent w-fit">
+              Original Character Maker
+            </h1>
+            <Button variant="secondary" size="sm" onClick={handleRandomAll}>
+              全ランダム
+            </Button>
+          </div>
           <p className="text-muted-foreground mt-2">
             AIの力で、あなたの想像するキャラクターを具現化しよう。
           </p>
