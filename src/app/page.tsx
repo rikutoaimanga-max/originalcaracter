@@ -140,9 +140,6 @@ export default function Home() {
               <span className="text-xs font-bold text-gray-600 dark:text-gray-300">全ランダム</span>
             </Button>
           </div>
-          <p className="text-muted-foreground mt-2">
-            AIの力で、あなたの想像するキャラクターを具現化しよう。
-          </p>
         </div>
 
         {/* ヘッダー部分のボタンの並びに追加 */}
