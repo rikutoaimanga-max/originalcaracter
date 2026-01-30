@@ -94,8 +94,8 @@ export const categories: Category[] = [
         items: [
             randomOption,
             { id: "straight", label: "ストレートヘア", value: "straight hair", imageSrc: "/images/hair_style/ストレートヘア.png", gender: "both" },
-            { id: "short_bangs", label: "短い前髪", value: "short bangs", imageSrc: "/images/hair_style/短い前髪.png", gender: "both" },
-            { id: "long_bangs", label: "長い前髪", value: "long bangs", imageSrc: "/images/hair_style/長い前髪.png", gender: "female" },
+            { id: "short_bangs", label: "短い前髪", value: "(short bangs:1.3), forehead", imageSrc: "/images/hair_style/短い前髪.png", gender: "both" },
+            { id: "long_bangs", label: "長い前髪", value: "(long bangs:1.3), eyes covered", imageSrc: "/images/hair_style/長い前髪.png", gender: "female" },
             { id: "sotohane", label: "外はね", value: "flipped out hair", imageSrc: "/images/hair_style/外はね.png", gender: "female" },
             { id: "wave", label: "ウェーブヘア", value: "wavy hair", imageSrc: "/images/hair_style/ウェーブヘア.png", gender: "female" },
 
@@ -154,7 +154,7 @@ export const categories: Category[] = [
             { id: "swept_bangs", label: "流した前髪", value: "swept bangs", imageSrc: "/images/hair_style/流した前髪.png", gender: "female" },
             { id: "hair_over_one_eye", label: "片目にかかる髪", value: "hair over one eye", imageSrc: "/images/hair_style/片目にかかる髪.png", gender: "female" },
             { id: "hair_over_eyes", label: "目にかかる髪", value: "hair over eyes", imageSrc: "/images/hair_style/目にかかる髪.png", gender: "both" },
-            { id: "short_bangs_2", label: "短い前髪", value: "short bangs", imageSrc: "/images/hair_style/短い前髪.png", gender: "female" },
+            { id: "short_bangs_2", label: "短い前髪", value: "(short bangs:1.3), forehead", imageSrc: "/images/hair_style/短い前髪.png", gender: "female" },
             { id: "braided_bun", label: "編み込みバン", value: "braided bun", imageSrc: "/images/hair_style/編み込みバン.png", gender: "female" },
             { id: "braided_pony", label: "編み込みポニー", value: "braided ponytail", imageSrc: "/images/hair_style/編み込みポニー.png", gender: "female" },
             { id: "long_bangs_2", label: "長い前髪", value: "long bangs", imageSrc: "/images/hair_style/長い前髪.png", gender: "female" },

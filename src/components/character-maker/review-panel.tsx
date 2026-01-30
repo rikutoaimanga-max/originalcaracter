@@ -91,6 +91,16 @@ export function ReviewPanel({
                     {isGenerating ? "生成中..." : "キャラクターを生成する"}
                 </Button>
 
+                {/* 選択内容の確認リスト */}
+                <div className="flex flex-wrap gap-2 pb-4">
+                    {selectedItems.map(({ category, item }) => (
+                        <div key={`${category}-${item.id}`} className="bg-white/10 px-3 py-1.5 rounded-full text-xs flex items-center gap-2 border border-white/5">
+                            <span className="text-muted-foreground opacity-70">{category}:</span>
+                            <span className="font-medium text-white">{item.label}</span>
+                        </div>
+                    ))}
+                </div>
+
 
             </div>
         </div>
