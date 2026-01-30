@@ -4,6 +4,7 @@ export interface OptionItem {
     value: string;
     imageSrc: string;
     description?: string;
+    gender?: string; // Legacy: unused but kept to prevent data errors
 }
 
 export interface Category {

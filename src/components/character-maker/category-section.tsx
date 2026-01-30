@@ -11,8 +11,7 @@ interface CategorySectionProps {
     selectedItemId?: string;
     onSelect: (value: string) => void;
     defaultOpen?: boolean;
-    onSelect: (value: string) => void;
-    defaultOpen?: boolean;
+
 }
 
 export function CategorySection({ category, selectedItemId, onSelect, defaultOpen = false }: CategorySectionProps) {
