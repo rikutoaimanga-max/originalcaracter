@@ -30,9 +30,11 @@ export const categories: Category[] = [
             { id: "human", label: "人間", value: "human", imageSrc: "/images/race/human.png", description: "標準的な人間" },
             { id: "elf", label: "エルフ", value: "elf, pointed ears", imageSrc: "/images/race/elf.png", description: "尖った耳を持つ長命種" },
             { id: "beast", label: "獣人", value: "beastkin, animal ears, tail", imageSrc: "/images/race/beast.png", description: "動物の特徴を持つ種族" },
+            { id: "dragon", label: "竜人", value: "dragonoid, dragon wings, horns, tail", imageSrc: "/images/race/dragon.png", description: "竜の血を引く種族" },
             { id: "angel", label: "天使", value: "angel, halo, wings", imageSrc: "/images/race/angel.png", description: "背中に翼を持つ神聖な存在" },
             { id: "demon", label: "悪魔", value: "demon, horns, bat wings", imageSrc: "/images/race/demon.png", description: "角と翼を持つ闇の住人" },
-            { id: "cyborg", label: "サイボーグ", value: "cyborg, mechanical parts", imageSrc: "/images/race/cyborg.png", description: "機械化された身体" },
+            { id: "vampire", label: "ヴァンパイア", value: "vampire, pale skin, fangs", imageSrc: "/images/race/vampire.png", description: "闇に生きる吸血鬼" },
+            { id: "android", label: "アンドロイド", value: "android, mechanical parts", imageSrc: "/images/race/android.png", description: "機械化された人造人間" },
         ],
     },
     {
