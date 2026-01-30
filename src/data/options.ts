@@ -96,6 +96,20 @@ export const categories: Category[] = [
         ],
     },
     {
+        id: "hair_length",
+        label: "髪の長さ",
+        items: [
+            randomOption,
+            { id: "long", label: "ロング", value: "long hair", imageSrc: "/images/hair_length/long.png" },
+            { id: "very_long", label: "ベリーロング", value: "very long hair", imageSrc: "/images/hair_length/very_long.png" },
+            { id: "medium", label: "ミディアム", value: "medium hair", imageSrc: "/images/hair_length/medium.png" },
+            { id: "short", label: "ショート", value: "short hair", imageSrc: "/images/hair_length/short.png" },
+            { id: "very_short", label: "ベリーショート", value: "very short hair", imageSrc: "/images/hair_length/very_short.png" },
+            { id: "pixie", label: "ピクシーカット", value: "pixie cut", imageSrc: "/images/hair_length/pixie.png" },
+            { id: "bob", label: "ボブ", value: "bob cut", imageSrc: "/images/hair_length/bob.png" },
+        ],
+    },
+    {
         id: "hair_color",
         label: "髪の色",
         items: [
