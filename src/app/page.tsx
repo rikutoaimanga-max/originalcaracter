@@ -12,7 +12,7 @@ import { Settings } from "lucide-react";
 
 export default function Home() {
   const [selections, setSelections] = useState<Record<string, string>>({});
-  const [gender, setGender] = useState<"male" | "female">("female");
+  const [selections, setSelections] = useState<Record<string, string>>({});
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [resolvedSelections, setResolvedSelections] = useState<Record<string, string> | null>(null);
@@ -107,8 +107,7 @@ export default function Home() {
       // 解決された選択肢をStateに保存
       setResolvedSelections(currentResolved);
 
-      const genderTag = gender === "male" ? "1boy, male focus" : "1girl, female focus";
-      const basePrompt = `A high quality, detailed anime style character illustration, white background, front view, full body, ${genderTag}, `;
+      const basePrompt = `A high quality, detailed anime style character illustration, white background, front view, full body, `;
       const finalPrompt = basePrompt + promptParts.join(", ") + ", masterpiece, best quality, 8k";
 
       console.log("Generating with prompt:", finalPrompt);
@@ -178,8 +177,7 @@ export default function Home() {
           <OptionsPanel
             selections={selections}
             onSelect={handleSelect}
-            gender={gender}
-            onGenderSelect={setGender}
+            onSelect={handleSelect}
           />
         </div>
 

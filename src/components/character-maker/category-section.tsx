@@ -11,11 +11,11 @@ interface CategorySectionProps {
     selectedItemId?: string;
     onSelect: (value: string) => void;
     defaultOpen?: boolean;
-    gender?: "male" | "female";
-    onGenderSelect?: (gender: "male" | "female") => void;
+    onSelect: (value: string) => void;
+    defaultOpen?: boolean;
 }
 
-export function CategorySection({ category, selectedItemId, onSelect, defaultOpen = false, gender, onGenderSelect }: CategorySectionProps) {
+export function CategorySection({ category, selectedItemId, onSelect, defaultOpen = false }: CategorySectionProps) {
     const [isOpen, setIsOpen] = useState(defaultOpen);
 
     return (
@@ -41,36 +41,7 @@ export function CategorySection({ category, selectedItemId, onSelect, defaultOpe
                     />
                 </button>
 
-                {/* 性別切り替えボタン (髪型カテゴリのみ) */}
-                {(category.id === "hair_style" || category.id.trim() === "hair_style") && gender && onGenderSelect && (
-                    <div className="flex bg-black/40 rounded-lg p-1 shrink-0 z-10 relative" onClick={(e) => {
-                        e.stopPropagation();
-                        e.preventDefault();
-                    }}>
-                        <button
-                            onClick={() => onGenderSelect("male")}
-                            className={cn(
-                                "px-3 py-1 text-xs font-bold rounded-md transition-all",
-                                gender === "male"
-                                    ? "bg-blue-600 text-white shadow-sm"
-                                    : "text-muted-foreground hover:text-white"
-                            )}
-                        >
-                            男性
-                        </button>
-                        <button
-                            onClick={() => onGenderSelect("female")}
-                            className={cn(
-                                "px-3 py-1 text-xs font-bold rounded-md transition-all",
-                                gender === "female"
-                                    ? "bg-pink-600 text-white shadow-sm"
-                                    : "text-muted-foreground hover:text-white"
-                            )}
-                        >
-                            女性
-                        </button>
-                    </div>
-                )}
+
             </div>
 
             <div
