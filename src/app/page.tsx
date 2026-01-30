@@ -132,12 +132,12 @@ export default function Home() {
             </h1>
             <Button
               variant="ghost"
-              size="icon"
               onClick={handleRandomAll}
-              className="p-0 hover:bg-transparent -ml-2 transition-transform hover:scale-110"
+              className="p-2 h-auto hover:bg-transparent -ml-2 transition-transform hover:scale-105 flex flex-col items-center gap-1"
               title="全ランダム"
             >
-              <img src="/images/ui/random_icon.png" alt="Random All" className="w-10 h-10 object-contain" />
+              <img src="/images/ui/random_icon.png" alt="Random All" className="w-14 h-14 object-contain" />
+              <span className="text-xs font-bold text-gray-600 dark:text-gray-300">全ランダム</span>
             </Button>
           </div>
           <p className="text-muted-foreground mt-2">
