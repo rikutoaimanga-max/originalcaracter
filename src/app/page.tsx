@@ -130,8 +130,14 @@ export default function Home() {
             <h1 className="text-3xl font-extrabold tracking-tight lg:text-4xl bg-gradient-to-r from-primary to-purple-400 bg-clip-text text-transparent w-fit">
               Original Character Maker
             </h1>
-            <Button variant="secondary" size="sm" onClick={handleRandomAll}>
-              全ランダム
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={handleRandomAll}
+              className="p-0 hover:bg-transparent -ml-2 transition-transform hover:scale-110"
+              title="全ランダム"
+            >
+              <img src="/images/ui/random_icon.png" alt="Random All" className="w-10 h-10 object-contain" />
             </Button>
           </div>
           <p className="text-muted-foreground mt-2">
@@ -190,6 +196,6 @@ export default function Home() {
         onClose={() => setIsSettingsOpen(false)}
         onSave={setApiKey}
       />
-    </div>
+    </div >
   );
 }
