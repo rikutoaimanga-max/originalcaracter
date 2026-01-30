@@ -44,11 +44,6 @@ export default function Home() {
   };
 
 
-  // 三面図用 State
-  const [referenceSheetImage, setReferenceSheetImage] = useState<string | null>(null);
-  const [isGeneratingRefSheet, setIsGeneratingRefSheet] = useState(false);
-  const [currentSeed, setCurrentSeed] = useState<number | null>(null);
-
   const handleGenerate = async () => {
     if (!apiKey) {
       alert("APIキーが設定されていません。右上の設定ボタンからキーを入力してください。");
@@ -58,9 +53,7 @@ export default function Home() {
 
     setIsGenerating(true);
     setGeneratedImage(null);
-    setReferenceSheetImage(null); // メイン画像再生成時は三面図もリセット
     setResolvedSelections(null);
-    setCurrentSeed(null);
 
     try {
       // プロンプト構築とランダム値の解決
@@ -108,38 +101,11 @@ export default function Home() {
       // APIキーを渡して生成
       const result = await generateCharacterImage(finalPrompt, apiKey);
       setGeneratedImage(result.base64);
-      setCurrentSeed(result.seed);
-      console.log("Generation seed:", result.seed);
     } catch (error) {
       console.error(error);
       alert("画像の生成に失敗しました。APIキーまたはモデルの設定を確認してください。");
     } finally {
       setIsGenerating(false);
-    }
-  };
-
-  // 三面図生成ハンドラ
-  const handleGenerateReferenceSheet = async () => {
-    if (!apiKey || !resolvedSelections) return;
-
-    setIsGeneratingRefSheet(true);
-    try {
-      // 解決済みの選択肢からプロンプトを再構築
-      const promptParts = Object.values(resolvedSelections);
-
-      const basePrompt = "concept art, character sheet, detailed character design, full body three views (front, side, back), including facial close-ups (front face, side face, back of head), white background, anime style, ";
-      const finalPrompt = basePrompt + promptParts.join(", ") + ", masterpiece, best quality, 8k, flat color";
-
-      console.log("Generating Reference Sheet with prompt:", finalPrompt, "Seed:", currentSeed);
-
-      // 同じシード値を使って生成（ビジュアルの一貫性を保つため）
-      const result = await generateCharacterImage(finalPrompt, apiKey, currentSeed ?? undefined);
-      setReferenceSheetImage(result.base64);
-    } catch (error) {
-      console.error(error);
-      alert("三面図の生成に失敗しました。");
-    } finally {
-      setIsGeneratingRefSheet(false);
     }
   };
 
@@ -197,9 +163,6 @@ export default function Home() {
             generatedImage={generatedImage}
             isGenerating={isGenerating}
             onGenerate={handleGenerate}
-            referenceSheetImage={referenceSheetImage}
-            isGeneratingRefSheet={isGeneratingRefSheet}
-            onGenerateReferenceSheet={handleGenerateReferenceSheet}
           />
         </div>
       </div>

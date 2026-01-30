@@ -239,7 +239,7 @@ export const categories: Category[] = [
             { id: "hard_hat", label: "ヘルメット(作業)", value: "hard hat", imageSrc: "/images/hat/工事用ヘルメット.png" },
             { id: "horned_helmet", label: "角付きメット", value: "horned helmet", imageSrc: "/images/hat/角付きヘルメット.png" },
             { id: "headband", label: "ヘッドバンド", value: "headband", imageSrc: "/images/hat/ヘッドバンド.png" },
-            { id: "hachimaki", label: "鉢巻", value: "hachimaki", imageSrc: "/images/hat/hachimaki.png" },
+
             { id: "headscarf", label: "ヘッドスカーフ", value: "headscarf", imageSrc: "/images/hat/ヘッドスカーフ.png" },
             { id: "bandana", label: "バンダナ", value: "bandana", imageSrc: "/images/hat/バンダナ.png" },
             { id: "diadem", label: "ディアデム", value: "diadem", imageSrc: "/images/hat/ディアデム.png" },

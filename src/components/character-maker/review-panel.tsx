@@ -12,10 +12,6 @@ interface ReviewPanelProps {
     generatedImage: string | null;
     isGenerating: boolean;
     onGenerate: () => void;
-    // New props
-    referenceSheetImage?: string | null;
-    isGeneratingRefSheet?: boolean;
-    onGenerateReferenceSheet?: () => void;
 }
 
 export function ReviewPanel({
@@ -23,10 +19,7 @@ export function ReviewPanel({
     resolvedSelections,
     generatedImage,
     isGenerating,
-    onGenerate,
-    referenceSheetImage,
-    isGeneratingRefSheet,
-    onGenerateReferenceSheet
+    onGenerate
 }: ReviewPanelProps) {
     // 表示すべき選択肢のソース（生成済みなら解決セット、そうでなければ現在の選択）
     // ただし、ユーザーが生成後に選択を変えた場合などを考慮し、
@@ -98,63 +91,7 @@ export function ReviewPanel({
                     {isGenerating ? "生成中..." : "キャラクターを生成する"}
                 </Button>
 
-                {/* キャラクターシート生成ボタン (メイン画像がある場合のみ表示) */}
-                {generatedImage && onGenerateReferenceSheet && (
-                    <div className="flex flex-col gap-2">
-                        <Button
-                            variant="secondary"
-                            onClick={onGenerateReferenceSheet}
-                            disabled={isGeneratingRefSheet}
-                            className="w-full border border-white/10 hover:bg-white/10"
-                        >
-                            {isGeneratingRefSheet ? "資料作成中..." : "キャラクターシートを生成する (追加)"}
-                        </Button>
 
-                        {/* キャラクターシートの表示エリア */}
-                        {referenceSheetImage && (
-                            <Card className="w-full relative overflow-hidden glass-card p-1 mt-2">
-                                <div className="relative rounded-lg overflow-hidden bg-black/60">
-                                    <img
-                                        src={referenceSheetImage}
-                                        alt="Character Sheet"
-                                        className="w-full object-contain"
-                                    />
-                                    <div className="absolute top-2 left-2 bg-black/50 px-2 py-1 rounded text-xs text-white">
-                                        キャラクターシート
-                                    </div>
-                                </div>
-                            </Card>
-                        )}
-                    </div>
-                )}
-
-
-                {/* 選択済みアイテムリスト */}
-                <div className="mt-2">
-                    <h3 className="text-sm font-medium text-muted-foreground mb-2">選択中のパーツ</h3>
-                    <div className="grid gap-3">
-                        {selectedItems.map(({ category, item }) => (
-                            <div key={category} className="bg-white/5 rounded-lg p-2 border border-white/5 flex items-center gap-3">
-                                <div className="w-12 h-12 rounded-md overflow-hidden bg-black/40 flex-shrink-0">
-                                    {item.imageSrc ? (
-                                        <img src={item.imageSrc} alt={item.label} className="w-full h-full object-cover" />
-                                    ) : (
-                                        <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">?</div>
-                                    )}
-                                </div>
-                                <div className="flex flex-col">
-                                    <span className="text-xs text-muted-foreground">{category}</span>
-                                    <span className="text-sm font-medium">{item.label}</span>
-                                </div>
-                            </div>
-                        ))}
-                        {selectedItems.length === 0 && (
-                            <div className="text-center text-muted-foreground text-sm py-8">
-                                まだ何も選択されていません
-                            </div>
-                        )}
-                    </div>
-                </div>
             </div>
         </div>
     );
