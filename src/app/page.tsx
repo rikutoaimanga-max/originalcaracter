@@ -177,7 +177,7 @@ export default function Home() {
           <OptionsPanel
             selections={selections}
             onSelect={handleSelect}
-            onSelect={handleSelect}
+
           />
         </div>
 
