@@ -9,7 +9,8 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
     }
 
     // ユーザー指定のモデル名
-    const modelName = "imagen-4.0-generate-001";
+    // Imagen 3.0 は 2K 出力をサポート
+    const modelName = "imagen-3.0-generate-001";
 
     // Google AI Studio (Generative Language API) のエンドポイント構築
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:predict?key=${apiKey}`;
@@ -33,6 +34,8 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
                 parameters: {
                     sampleCount: 1,
                     aspectRatio: "3:4",
+                    // 2K/4K選択時は高解像度化(2048px)をリクエスト
+                    ...(width && width > 1200 ? { sampleImageSize: "2048" } : {}),
                 },
             }),
         });
