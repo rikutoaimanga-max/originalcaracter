@@ -18,7 +18,7 @@ export function CategorySection({ category, selectedItemId, onSelect, defaultOpe
     const [isOpen, setIsOpen] = useState(defaultOpen);
 
     return (
-        <div className="shrink-0 border border-white/10 rounded-xl overflow-hidden bg-black/20 mb-3 last:mb-0">
+        <div className="shrink-0 border border-white/10 rounded-xl overflow-hidden bg-black/20">
             <div className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors gap-4">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
