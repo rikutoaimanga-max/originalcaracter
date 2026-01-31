@@ -8,7 +8,7 @@ import { categories } from "@/data/options";
 import { generateCharacterImage } from "@/app/actions";
 import { listAvailableModels } from "@/app/debug-actions";
 import { Button } from "@/components/ui/button";
-import { Settings } from "lucide-react";
+import { Settings, Trash2 } from "lucide-react";
 
 export default function Home() {
   const [selections, setSelections] = useState<Record<string, string>>({});
@@ -55,6 +55,12 @@ export default function Home() {
       }
     });
     setSelections(newSelections);
+  };
+
+  const handleClearAll = () => {
+    if (confirm("すべての選択を解除してもよろしいですか？")) {
+      setSelections({});
+    }
   };
 
 
@@ -139,6 +145,17 @@ export default function Home() {
             >
               <img src="/images/ui/random_icon.png" alt="Random All" className="w-14 h-14 object-contain" />
               <span className="text-xs font-bold text-gray-600 dark:text-gray-300">全ランダム</span>
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={handleClearAll}
+              className="p-2 h-auto hover:bg-transparent transition-transform hover:scale-105 flex flex-col items-center gap-1"
+              title="リセット"
+            >
+              <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-400 flex items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-500 hover:bg-red-500/10 transition-colors">
+                <Trash2 className="w-6 h-6" />
+              </div>
+              <span className="text-xs font-bold text-gray-600 dark:text-gray-300">解除</span>
             </Button>
           </div>
         </div>
