@@ -159,9 +159,6 @@ export const categories: Category[] = [
             { id: "long_bangs_2", label: "長い前髪", value: "long bangs", imageSrc: "/images/hair_style/長い前髪.png", gender: "female" },
             { id: "side_tufts", label: "頭の側面から伸びる毛束", value: "side tufts", imageSrc: "/images/hair_style/頭の側面から伸びる毛束.png", gender: "female" },
 
-            { id: "man_short", label: "短髪(男)", value: "short hair, masculine", imageSrc: "/images/hair_style/man_short.png", gender: "male" },
-            { id: "man_wolf", label: "ウルフ(男)", value: "wolf cut, masculine", imageSrc: "/images/hair_style/man_wolf.png", gender: "male" },
-            { id: "man_slicked", label: "オールバック", value: "slicked back hair", imageSrc: "/images/hair_style/man_slicked.png", gender: "male" },
         ],
     },
     {
