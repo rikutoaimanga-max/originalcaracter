@@ -1,6 +1,6 @@
 "use server";
 
-export async function generateCharacterImage(prompt: string, userApiKey?: string, seed?: number, width?: number, height?: number) {
+export async function generateCharacterImage(prompt: string, userApiKey?: string, seed?: number) {
     // ユーザー入力キーを優先し、なければ環境変数を使用
     const apiKey = userApiKey || process.env.GOOGLE_API_KEY;
 
@@ -9,7 +9,7 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
     }
 
     // ユーザー指定のモデル名
-    // Imagen 3.0 は 2K 出力をサポート
+    // 安定版のImagen 3を使用
     const modelName = "imagen-3.0-generate-001";
 
     // Google AI Studio (Generative Language API) のエンドポイント構築
@@ -33,6 +33,7 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
                 ],
                 parameters: {
                     sampleCount: 1,
+                    // アスペクト比指定のみ残す（これが一番安全）
                     aspectRatio: "3:4",
                 },
             }),

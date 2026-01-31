@@ -23,7 +23,7 @@ export default function Home() {
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [resolvedSelections, setResolvedSelections] = useState<Record<string, string> | null>(null);
   const [generatedPrompt, setGeneratedPrompt] = useState<string | null>(null);
-  const [resolution, setResolution] = useState("2K");
+
 
   // API Key State
   const [apiKey, setApiKey] = useState("");
@@ -129,16 +129,10 @@ export default function Home() {
       console.log("Generating with prompt:", finalPrompt);
       setGeneratedPrompt(finalPrompt);
 
-      // 解像度マッピング
-      const resolutionMap: Record<string, { width: number; height: number }> = {
-        "1K": { width: 848, height: 1264 },
-        "2K": { width: 1696, height: 2528 },
-        "4K": { width: 3392, height: 5056 },
-      };
-      const dims = resolutionMap[resolution] || resolutionMap["2K"]; // デフォルト2K
 
-      // APIキーと解像度を渡して生成
-      const result = await generateCharacterImage(finalPrompt, apiKey, undefined, dims.width, dims.height);
+
+      // APIキーを渡して生成
+      const result = await generateCharacterImage(finalPrompt, apiKey);
       setGeneratedImage(result.base64);
     } catch (error) {
       console.error(error);
@@ -177,33 +171,7 @@ export default function Home() {
               選択解除
             </Button>
 
-            {/* 出力解像度セレクター */}
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline" size="sm" className="gap-2 text-muted-foreground">
-                  <Monitor className="w-4 h-4" />
-                  {resolution}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-40 p-1 bg-black/90 border-white/10 backdrop-blur-md">
-                <div className="flex flex-col gap-1">
-                  {["1K", "2K", "4K"].map((res) => (
-                    <Button
-                      key={res}
-                      variant="ghost"
-                      size="sm"
-                      className={cn(
-                        "w-full justify-start font-normal",
-                        resolution === res ? "bg-white/20 text-white" : "text-muted-foreground hover:text-white hover:bg-white/10"
-                      )}
-                      onClick={() => setResolution(res)}
-                    >
-                      {res}
-                    </Button>
-                  ))}
-                </div>
-              </PopoverContent>
-            </Popover>
+
           </div>
         </div>
 
