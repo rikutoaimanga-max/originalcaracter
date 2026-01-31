@@ -358,4 +358,18 @@ export const categories: Category[] = [
             { id: "real", label: "実写風", value: "photorealistic, 8k, realistic texture, photography", imageSrc: "https://placehold.co/400x400/png?text=Real" },
         ],
     },
+    {
+        id: "color_mode",
+        label: "色彩モード",
+        items: [
+            randomOption,
+            { id: "full_color", label: "フルカラー", value: "full color", imageSrc: "https://placehold.co/400x400/png?text=Color" },
+            { id: "monochrome", label: "モノクロ", value: "monochrome, greyscale", imageSrc: "https://placehold.co/400x400/000000/ffffff/png?text=Mono" },
+            { id: "sepia", label: "セピア", value: "sepia", imageSrc: "https://placehold.co/400x400/704214/ffffff/png?text=Sepia" },
+            { id: "vivid", label: "ビビッド", value: "vivid colors", imageSrc: "https://placehold.co/400x400/ff00ff/ffffff/png?text=Vivid" },
+            { id: "pastel", label: "パステル", value: "pastel colors", imageSrc: "https://placehold.co/400x400/ffb6c1/ffffff/png?text=Pastel" },
+            { id: "muted", label: "くすみカラー", value: "muted colors, desaturated", imageSrc: "https://placehold.co/400x400/888888/ffffff/png?text=Muted" },
+            { id: "neon", label: "ネオン", value: "neon colors, glowing", imageSrc: "https://placehold.co/400x400/00ff00/000000/png?text=Neon" },
+        ],
+    },
 ];
