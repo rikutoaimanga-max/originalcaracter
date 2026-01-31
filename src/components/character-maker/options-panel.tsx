@@ -10,6 +10,7 @@ interface OptionsPanelProps {
 }
 
 export function OptionsPanel({ selections, onSelect }: OptionsPanelProps) {
+    // 確実にすべてのカテゴリとアイテムを表示する
     return (
         <div className="flex flex-col h-full overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
             {categories.map((category, index) => {
