@@ -34,8 +34,6 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
                 parameters: {
                     sampleCount: 1,
                     aspectRatio: "3:4",
-                    // 2K/4K選択時は高解像度化(2048px)をリクエスト
-                    ...(width && width > 1200 ? { sampleImageSize: "2048" } : {}),
                 },
             }),
         });
