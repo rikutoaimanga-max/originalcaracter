@@ -9,8 +9,8 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
     }
 
     // ユーザー指定のモデル名
-    // 安定版のImagen 3を使用
-    const modelName = "imagen-3.0-generate-001";
+    // 以前動作していた 4.0 に戻す
+    const modelName = "imagen-4.0-generate-001";
 
     // Google AI Studio (Generative Language API) のエンドポイント構築
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:predict?key=${apiKey}`;
