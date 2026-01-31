@@ -123,13 +123,22 @@ export default function Home() {
       setResolvedSelections(currentResolved);
 
       const basePrompt = `A high quality, detailed anime style character illustration, white background, front view, `;
-      const finalPrompt = basePrompt + promptParts.join(", ") + `, masterpiece, best quality, ${resolution.toLowerCase()}`;
+      // 解像度はプロンプトには含めず、パラメータとして渡す
+      const finalPrompt = basePrompt + promptParts.join(", ") + ", masterpiece, best quality";
 
       console.log("Generating with prompt:", finalPrompt);
       setGeneratedPrompt(finalPrompt);
 
-      // APIキーを渡して生成
-      const result = await generateCharacterImage(finalPrompt, apiKey);
+      // 解像度マッピング
+      const resolutionMap: Record<string, { width: number; height: number }> = {
+        "1K": { width: 848, height: 1264 },
+        "2K": { width: 1696, height: 2528 },
+        "4K": { width: 3392, height: 5056 },
+      };
+      const dims = resolutionMap[resolution] || resolutionMap["2K"]; // デフォルト2K
+
+      // APIキーと解像度を渡して生成
+      const result = await generateCharacterImage(finalPrompt, apiKey, undefined, dims.width, dims.height);
       setGeneratedImage(result.base64);
     } catch (error) {
       console.error(error);

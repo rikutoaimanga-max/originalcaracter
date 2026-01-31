@@ -1,6 +1,6 @@
 "use server";
 
-export async function generateCharacterImage(prompt: string, userApiKey?: string, seed?: number) {
+export async function generateCharacterImage(prompt: string, userApiKey?: string, seed?: number, width?: number, height?: number) {
     // ユーザー入力キーを優先し、なければ環境変数を使用
     const apiKey = userApiKey || process.env.GOOGLE_API_KEY;
 
@@ -32,7 +32,8 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
                 ],
                 parameters: {
                     sampleCount: 1,
-                    aspectRatio: "3:4", // ポートレート向き
+                    // width/heightが指定されていれば優先、なければアスペクト比
+                    ...(width && height ? { width, height } : { aspectRatio: "3:4" }),
                 },
             }),
         });
