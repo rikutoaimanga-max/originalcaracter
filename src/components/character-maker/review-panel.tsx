@@ -4,7 +4,7 @@ import { categories } from "@/data/options";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Wand2, Image as ImageIcon, Copy, Check } from "lucide-react";
+import { Wand2, Image as ImageIcon, Copy, Check, Download } from "lucide-react";
 
 import { useState } from "react";
 
@@ -61,6 +61,16 @@ export function ReviewPanel({
         }
     };
 
+    const handleDownload = () => {
+        if (!generatedImage) return;
+        const link = document.createElement("a");
+        link.href = generatedImage;
+        link.download = `character-${Date.now()}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
     return (
         <div className="flex flex-col h-full gap-4">
             <h2 className="text-xl font-bold">レビュー</h2>
@@ -93,6 +103,19 @@ export function ReviewPanel({
                         )}
                     </div>
                 </Card>
+
+                {/* 画像保存ボタン */}
+                {generatedImage && (
+                    <Button
+                        size="lg"
+                        variant="secondary"
+                        className="w-full gap-2 font-bold shrink-0 bg-green-600 hover:bg-green-700 text-white"
+                        onClick={handleDownload}
+                    >
+                        <Download className="w-5 h-5" />
+                        画像を保存する
+                    </Button>
+                )}
 
                 {/* 生成ボタン */}
                 <Button
