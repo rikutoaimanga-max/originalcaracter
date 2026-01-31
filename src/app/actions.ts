@@ -32,8 +32,8 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
                 ],
                 parameters: {
                     sampleCount: 1,
-                    // width/heightが指定されていれば優先、なければアスペクト比
-                    ...(width && height ? { width, height } : { aspectRatio: "3:4" }),
+                    // width/height指定はAPIで無視されるため、アスペクト比 "3:4" を強制して縦長を確保する
+                    aspectRatio: "3:4",
                 },
             }),
         });
