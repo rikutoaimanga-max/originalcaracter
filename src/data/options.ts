@@ -372,4 +372,16 @@ export const categories: Category[] = [
             { id: "neon", label: "ネオン", value: "neon colors, glowing", imageSrc: "https://placehold.co/400x400/00ff00/000000/png?text=Neon" },
         ],
     },
+    {
+        id: "generation_method",
+        label: "生成方法",
+        items: [
+            randomOption,
+            { id: "bust_up", label: "胸から上のアップ", value: "bust shot, chest up", imageSrc: "https://placehold.co/400x400/png?text=BustUp" },
+            { id: "waist_up", label: "腰から上のアップ", value: "waist up, half body", imageSrc: "https://placehold.co/400x400/png?text=WaistUp" },
+            { id: "knee_up", label: "膝から上のアップ", value: "knee up, cowboy shot", imageSrc: "https://placehold.co/400x400/png?text=KneeUp" },
+            { id: "full_body", label: "全身イラスト", value: "full body, wide shot", imageSrc: "https://placehold.co/400x400/png?text=FullBody" },
+            { id: "character_sheet", label: "キャラクターシート", value: "character sheet, concept art, reference sheet, front view face, side view face, back view face, front view full body, side view full body, multiple views", imageSrc: "https://placehold.co/400x400/png?text=Sheet" },
+        ],
+    },
 ];
