@@ -238,19 +238,7 @@ export const categories: Category[] = [
             { id: "serious", label: "真剣", value: "serious face", imageSrc: "https://placehold.co/400x400/png?text=Serious" },
         ],
     },
-    {
-        id: "situation",
-        label: "シチュエーション",
-        items: [
-            randomOption,
-            { id: "studio", label: "スタジオ", value: "simple background, white background", imageSrc: "https://placehold.co/400x400/png?text=Studio" },
-            { id: "fantasy_forest", label: "森", value: "fantasy forest, nature, trees", imageSrc: "https://placehold.co/400x400/png?text=Forest" },
-            { id: "cyber_city", label: "サイバーシティ", value: "cyberpunk city, neon lights", imageSrc: "https://placehold.co/400x400/png?text=Cyber" },
-            { id: "classroom", label: "教室", value: "classroom, school desk", imageSrc: "https://placehold.co/400x400/png?text=Class" },
-            { id: "cafe", label: "カフェ", value: "cafe, indoor, coffee", imageSrc: "https://placehold.co/400x400/png?text=Cafe" },
-            { id: "sky", label: "青空", value: "blue sky, clouds, day", imageSrc: "https://placehold.co/400x400/png?text=Sky" },
-        ],
-    },
+
     {
         id: "hat",
         label: "帽子・頭部装飾",
