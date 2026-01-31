@@ -4,6 +4,7 @@ import { useState } from "react";
 import { type Category, type OptionItem } from "@/data/options";
 import { SelectionCard } from "./selection-card";
 import { ColorSelectionCard } from "./color-selection-card";
+import { CustomColorPicker } from "./custom-color-picker";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -54,6 +55,17 @@ export function CategorySection({ category, selectedItemId, onSelect, defaultOpe
                     {/* カラーパレット表示の場合 */}
                     {(category.id === "eyes_color" || category.id === "hair_color") ? (
                         <div className="px-4 pt-2 pb-6 flex flex-wrap gap-4 items-center justify-start">
+                            <CustomColorPicker
+                                color={
+                                    selectedItemId?.match(/color: (#[0-9A-Fa-f]{6})/)
+                                        ? selectedItemId.match(/color: (#[0-9A-Fa-f]{6})/)![1]
+                                        : "#ffffff"
+                                }
+                                onChange={(hex) => {
+                                    const prefix = category.id === "eyes_color" ? "eyes" : "hair";
+                                    onSelect(`(${prefix} color: ${hex})`);
+                                }}
+                            />
                             {category.items.map((item) => (
                                 <ColorSelectionCard
                                     key={item.id}
