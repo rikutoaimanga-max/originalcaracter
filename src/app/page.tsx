@@ -155,7 +155,7 @@ export default function Home() {
               <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-400 flex items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-500 hover:bg-red-500/10 transition-colors">
                 <Trash2 className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold text-gray-600 dark:text-gray-300">解除</span>
+              <span className="text-xs font-bold text-gray-600 dark:text-gray-300">選択解除</span>
             </Button>
           </div>
         </div>
