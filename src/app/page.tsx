@@ -8,7 +8,13 @@ import { categories } from "@/data/options";
 import { generateCharacterImage } from "@/app/actions";
 import { listAvailableModels } from "@/app/debug-actions";
 import { Button } from "@/components/ui/button";
-import { Settings, Trash2 } from "lucide-react";
+import { Wand2, RotateCcw, Monitor, Trash2, Settings } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export default function Home() {
   const [selections, setSelections] = useState<Record<string, string>>({});
@@ -17,6 +23,7 @@ export default function Home() {
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [resolvedSelections, setResolvedSelections] = useState<Record<string, string> | null>(null);
   const [generatedPrompt, setGeneratedPrompt] = useState<string | null>(null);
+  const [resolution, setResolution] = useState("2K");
 
   // API Key State
   const [apiKey, setApiKey] = useState("");
@@ -116,7 +123,7 @@ export default function Home() {
       setResolvedSelections(currentResolved);
 
       const basePrompt = `A high quality, detailed anime style character illustration, white background, front view, `;
-      const finalPrompt = basePrompt + promptParts.join(", ") + ", masterpiece, best quality, 8k";
+      const finalPrompt = basePrompt + promptParts.join(", ") + `, masterpiece, best quality, ${resolution.toLowerCase()}`;
 
       console.log("Generating with prompt:", finalPrompt);
       setGeneratedPrompt(finalPrompt);
@@ -149,17 +156,45 @@ export default function Home() {
               <img src="/images/ui/random_icon.png" alt="Random All" className="w-14 h-14 object-contain" />
               <span className="text-xs font-bold text-gray-600 dark:text-gray-300">全ランダム</span>
             </Button>
+            {/* 選択解除ボタン */}
             <Button
-              variant="ghost"
+              variant="outline"
+              size="sm"
               onClick={handleClearAll}
-              className="p-2 h-auto hover:bg-transparent transition-transform hover:scale-105 flex flex-col items-center gap-1"
-              title="リセット"
+              className="gap-2 text-muted-foreground hover:text-destructive hover:border-destructive hover:bg-destructive/10"
+              title="すべての選択を解除"
             >
-              <div className="w-14 h-14 rounded-full border-2 border-dashed border-gray-400 flex items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-500 hover:bg-red-500/10 transition-colors">
-                <Trash2 className="w-6 h-6" />
-              </div>
-              <span className="text-xs font-bold text-gray-600 dark:text-gray-300">選択解除</span>
+              <Trash2 className="w-4 h-4" />
+              選択解除
             </Button>
+
+            {/* 出力解像度セレクター */}
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2 text-muted-foreground">
+                  <Monitor className="w-4 h-4" />
+                  {resolution}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-40 p-1 bg-black/90 border-white/10 backdrop-blur-md">
+                <div className="flex flex-col gap-1">
+                  {["1K", "2K", "4K"].map((res) => (
+                    <Button
+                      key={res}
+                      variant="ghost"
+                      size="sm"
+                      className={cn(
+                        "w-full justify-start font-normal",
+                        resolution === res ? "bg-white/20 text-white" : "text-muted-foreground hover:text-white hover:bg-white/10"
+                      )}
+                      onClick={() => setResolution(res)}
+                    >
+                      {res}
+                    </Button>
+                  ))}
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
 
