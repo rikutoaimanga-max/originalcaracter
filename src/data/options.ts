@@ -5,6 +5,7 @@ export interface OptionItem {
     imageSrc: string;
     description?: string;
     gender?: string; // Legacy: unused but kept to prevent data errors
+    color?: string; // For color palette display
 }
 
 export interface Category {
@@ -79,12 +80,16 @@ export const categories: Category[] = [
         label: "瞳の色",
         items: [
             randomOption,
-            { id: "red", label: "赤", value: "red eyes", imageSrc: "https://placehold.co/400x400/ff0000/ffffff/png?text=Red" },
-            { id: "blue", label: "青", value: "blue eyes", imageSrc: "https://placehold.co/400x400/0000ff/ffffff/png?text=Blue" },
-            { id: "green", label: "緑", value: "green eyes", imageSrc: "https://placehold.co/400x400/008000/ffffff/png?text=Green" },
-            { id: "yellow", label: "黄", value: "yellow eyes", imageSrc: "https://placehold.co/400x400/ffff00/000000/png?text=Yellow" },
-            { id: "purple", label: "紫", value: "purple eyes", imageSrc: "https://placehold.co/400x400/800080/ffffff/png?text=Purple" },
-            { id: "heterochromia", label: "オッドアイ", value: "heterochromia", imageSrc: "https://placehold.co/400x400/png?text=Odd" },
+            { id: "red", label: "赤", value: "red eyes", imageSrc: "https://placehold.co/400x400/ff0000/ffffff/png?text=Red", color: "#E53935" },
+            { id: "blue", label: "青", value: "blue eyes", imageSrc: "https://placehold.co/400x400/0000ff/ffffff/png?text=Blue", color: "#1E88E5" },
+            { id: "green", label: "緑", value: "green eyes", imageSrc: "https://placehold.co/400x400/008000/ffffff/png?text=Green", color: "#43A047" },
+            { id: "yellow", label: "黄", value: "yellow eyes", imageSrc: "https://placehold.co/400x400/ffff00/000000/png?text=Yellow", color: "#FDD835" },
+            { id: "purple", label: "紫", value: "purple eyes", imageSrc: "https://placehold.co/400x400/800080/ffffff/png?text=Purple", color: "#8E24AA" },
+            { id: "heterochromia", label: "オッドアイ", value: "heterochromia", imageSrc: "https://placehold.co/400x400/png?text=Odd", color: "linear-gradient(135deg, #1E88E5 50%, #E53935 50%)" },
+            { id: "black", label: "黒", value: "black eyes", imageSrc: "", color: "#212121" },
+            { id: "gray", label: "灰", value: "gray eyes", imageSrc: "", color: "#9E9E9E" },
+            { id: "pink", label: "ピンク", value: "pink eyes", imageSrc: "", color: "#F48FB1" },
+            { id: "brown", label: "茶", value: "brown eyes", imageSrc: "", color: "#795548" },
         ],
     },
     {
@@ -180,13 +185,17 @@ export const categories: Category[] = [
         label: "髪の色",
         items: [
             randomOption,
-            { id: "black", label: "黒", value: "black hair", imageSrc: "https://placehold.co/400x400/000000/ffffff/png?text=Black" },
-            { id: "blonde", label: "金", value: "blonde hair", imageSrc: "https://placehold.co/400x400/ffd700/000000/png?text=Gold" },
-            { id: "silver", label: "銀", value: "silver hair", imageSrc: "https://placehold.co/400x400/c0c0c0/000000/png?text=Silver" },
-            { id: "red_hair", label: "赤", value: "red hair", imageSrc: "https://placehold.co/400x400/ff0000/ffffff/png?text=Red" },
-            { id: "blue_hair", label: "青", value: "blue hair", imageSrc: "https://placehold.co/400x400/0000ff/ffffff/png?text=Blue" },
-            { id: "pink", label: "ピンク", value: "pink hair", imageSrc: "https://placehold.co/400x400/ffc0cb/000000/png?text=Pink" },
-            { id: "white", label: "白", value: "white hair", imageSrc: "https://placehold.co/400x400/ffffff/000000/png?text=White" },
+            { id: "black", label: "黒", value: "black hair", imageSrc: "https://placehold.co/400x400/000000/ffffff/png?text=Black", color: "#212121" },
+            { id: "blonde", label: "金", value: "blonde hair", imageSrc: "https://placehold.co/400x400/ffd700/000000/png?text=Gold", color: "#FBC02D" },
+            { id: "silver", label: "銀", value: "silver hair", imageSrc: "https://placehold.co/400x400/c0c0c0/000000/png?text=Silver", color: "#BDBDBD" },
+            { id: "red_hair", label: "赤", value: "red hair", imageSrc: "https://placehold.co/400x400/ff0000/ffffff/png?text=Red", color: "#D32F2F" },
+            { id: "blue_hair", label: "青", value: "blue hair", imageSrc: "https://placehold.co/400x400/0000ff/ffffff/png?text=Blue", color: "#1565C0" },
+            { id: "pink", label: "ピンク", value: "pink hair", imageSrc: "https://placehold.co/400x400/ffc0cb/000000/png?text=Pink", color: "#F48FB1" },
+            { id: "white", label: "白", value: "white hair", imageSrc: "https://placehold.co/400x400/ffffff/000000/png?text=White", color: "#F5F5F5" },
+            { id: "brown", label: "茶", value: "brown hair", imageSrc: "", color: "#795548" },
+            { id: "green", label: "緑", value: "green hair", imageSrc: "", color: "#43A047" },
+            { id: "purple", label: "紫", value: "purple hair", imageSrc: "", color: "#8E24AA" },
+            { id: "orange", label: "橙", value: "orange hair", imageSrc: "", color: "#EF6C00" },
         ],
     },
     {

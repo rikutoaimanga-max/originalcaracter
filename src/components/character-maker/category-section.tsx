@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { type Category, type OptionItem } from "@/data/options";
 import { SelectionCard } from "./selection-card";
+import { ColorSelectionCard } from "./color-selection-card";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -50,16 +51,31 @@ export function CategorySection({ category, selectedItemId, onSelect, defaultOpe
                 )}
             >
                 <div className="overflow-x-hidden overflow-y-auto max-h-[400px]">
-                    <div className="px-4 pt-0 pb-12 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                        {category.items.map((item) => (
-                            <SelectionCard
-                                key={item.id}
-                                item={item}
-                                isSelected={selectedItemId === item.value}
-                                onSelect={() => onSelect(item.value)}
-                            />
-                        ))}
-                    </div>
+                    {/* カラーパレット表示の場合 */}
+                    {(category.id === "eyes_color" || category.id === "hair_color") ? (
+                        <div className="px-4 pt-2 pb-6 flex flex-wrap gap-4 items-center justify-start">
+                            {category.items.map((item) => (
+                                <ColorSelectionCard
+                                    key={item.id}
+                                    item={item}
+                                    isSelected={selectedItemId === item.value}
+                                    onSelect={() => onSelect(item.value)}
+                                />
+                            ))}
+                        </div>
+                    ) : (
+                        /* 通常のグリッド表示 */
+                        <div className="px-4 pt-0 pb-12 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                            {category.items.map((item) => (
+                                <SelectionCard
+                                    key={item.id}
+                                    item={item}
+                                    isSelected={selectedItemId === item.value}
+                                    onSelect={() => onSelect(item.value)}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
