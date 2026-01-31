@@ -113,7 +113,7 @@ export default function Home() {
       // 解決された選択肢をStateに保存
       setResolvedSelections(currentResolved);
 
-      const basePrompt = `A high quality, detailed anime style character illustration, white background, front view, full body, `;
+      const basePrompt = `A high quality, detailed anime style character illustration, white background, front view, `;
       const finalPrompt = basePrompt + promptParts.join(", ") + ", masterpiece, best quality, 8k";
 
       console.log("Generating with prompt:", finalPrompt);
