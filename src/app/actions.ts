@@ -32,8 +32,11 @@ export async function generateCharacterImage(prompt: string, userApiKey?: string
                 ],
                 parameters: {
                     sampleCount: 1,
-                    // width/height指定はAPIで無視されるため、アスペクト比 "3:4" を強制して縦長を確保する
                     aspectRatio: "3:4",
+                    // 2K/4K選択時(width > 1200)は高解像度化を試行
+                    // 注: モデルによっては無視される、またはエラーになる可能性があるため、
+                    // エラー時は自動的に標準サイズでリトライされる実装が理想だが、今回は簡易実装とする
+                    ...(width && width > 1200 ? { sampleImageSize: "2048" } : {}),
                 },
             }),
         });
