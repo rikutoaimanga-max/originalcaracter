@@ -4,12 +4,15 @@ import { categories } from "@/data/options";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Wand2, Image as ImageIcon } from "lucide-react";
+import { Wand2, Image as ImageIcon, Copy, Check } from "lucide-react";
+
+import { useState } from "react";
 
 interface ReviewPanelProps {
     selections: Record<string, string>;
     resolvedSelections?: Record<string, string> | null;
     generatedImage: string | null;
+    generatedPrompt?: string | null;
     isGenerating: boolean;
     onGenerate: () => void;
 }
@@ -18,9 +21,12 @@ export function ReviewPanel({
     selections,
     resolvedSelections,
     generatedImage,
+    generatedPrompt,
     isGenerating,
     onGenerate
 }: ReviewPanelProps) {
+    const [copied, setCopied] = useState(false);
+
     // 表示すべき選択肢のソース（生成済みなら解決セット、そうでなければ現在の選択）
     // ただし、ユーザーが生成後に選択を変えた場合などを考慮し、
     // 「生成結果の表示モード」と「現在の編集モード」の区別がUI上明確でないため、
@@ -46,6 +52,14 @@ export function ReviewPanel({
         const item = cat.items.find((i) => i.value === value);
         return item ? { category: cat.label, item } : null;
     }).filter((i) => i !== null);
+
+    const handleCopyPrompt = async () => {
+        if (generatedPrompt) {
+            await navigator.clipboard.writeText(generatedPrompt);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        }
+    };
 
     return (
         <div className="flex flex-col h-full gap-4">
@@ -90,6 +104,27 @@ export function ReviewPanel({
                     <Wand2 className="w-5 h-5" />
                     {isGenerating ? "生成中..." : "キャラクターを生成する"}
                 </Button>
+
+                {/* プロンプト表示エリア */}
+                {generatedPrompt && (
+                    <div className="bg-white/5 rounded-lg p-3 border border-white/10 text-xs">
+                        <div className="flex items-center justify-between mb-2">
+                            <span className="font-bold text-muted-foreground">使用されたプロンプト</span>
+                            <Button
+                                variant="ghost"
+                                size="icon"
+                                className="h-6 w-6 hover:bg-white/10"
+                                onClick={handleCopyPrompt}
+                                title="プロンプトをコピー"
+                            >
+                                {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
+                            </Button>
+                        </div>
+                        <div className="bg-black/30 p-2 rounded text-muted-foreground break-all max-h-24 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10">
+                            {generatedPrompt}
+                        </div>
+                    </div>
+                )}
 
                 {/* 選択内容の確認リスト */}
                 <div className="flex flex-wrap gap-2 pb-4">

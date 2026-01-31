@@ -16,6 +16,7 @@ export default function Home() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [resolvedSelections, setResolvedSelections] = useState<Record<string, string> | null>(null);
+  const [generatedPrompt, setGeneratedPrompt] = useState<string | null>(null);
 
   // API Key State
   const [apiKey, setApiKey] = useState("");
@@ -74,6 +75,7 @@ export default function Home() {
     setIsGenerating(true);
     setGeneratedImage(null);
     setResolvedSelections(null);
+    setGeneratedPrompt(null);
 
     try {
       // プロンプト構築とランダム値の解決
@@ -117,6 +119,7 @@ export default function Home() {
       const finalPrompt = basePrompt + promptParts.join(", ") + ", masterpiece, best quality, 8k";
 
       console.log("Generating with prompt:", finalPrompt);
+      setGeneratedPrompt(finalPrompt);
 
       // APIキーを渡して生成
       const result = await generateCharacterImage(finalPrompt, apiKey);
@@ -204,6 +207,7 @@ export default function Home() {
             selections={selections}
             resolvedSelections={resolvedSelections}
             generatedImage={generatedImage}
+            generatedPrompt={generatedPrompt}
             isGenerating={isGenerating}
             onGenerate={handleGenerate}
           />
