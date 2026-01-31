@@ -88,6 +88,51 @@ export function CategorySection({ category, selectedItemId, onSelect, defaultOpe
                             ))}
                         </div>
                     )}
+
+                    {/* オッドアイ選択時の追加設定 */}
+                    {category.id === "eyes_color" && selectedItemId?.includes("heterochromia") && (
+                        <div className="px-4 pb-6 -mt-2 animate-in fade-in slide-in-from-top-2">
+                            <div className="p-4 rounded-lg bg-white/5 border border-white/10 space-y-3">
+                                <span className="text-sm font-bold text-white block mb-2">オッドアイ詳細設定</span>
+                                <div className="flex gap-8">
+                                    <div className="flex flex-col gap-1">
+                                        <span className="text-xs text-muted-foreground">右目の色</span>
+                                        <CustomColorPicker
+                                            color={
+                                                selectedItemId.match(/\(right eye color: (#[0-9A-Fa-f]{6})\)/)
+                                                    ? selectedItemId.match(/\(right eye color: (#[0-9A-Fa-f]{6})\)/)![1]
+                                                    : "#E53935" // デフォルト赤
+                                            }
+                                            onChange={(hex) => {
+                                                // 既存の左目色を取得（なければデフォルト青）
+                                                const leftColor = selectedItemId.match(/\(left eye color: (#[0-9A-Fa-f]{6})\)/)
+                                                    ? selectedItemId.match(/\(left eye color: (#[0-9A-Fa-f]{6})\)/)![1]
+                                                    : "#1E88E5";
+                                                onSelect(`heterochromia, (right eye color: ${hex}), (left eye color: ${leftColor})`);
+                                            }}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col gap-1">
+                                        <span className="text-xs text-muted-foreground">左目の色</span>
+                                        <CustomColorPicker
+                                            color={
+                                                selectedItemId.match(/\(left eye color: (#[0-9A-Fa-f]{6})\)/)
+                                                    ? selectedItemId.match(/\(left eye color: (#[0-9A-Fa-f]{6})\)/)![1]
+                                                    : "#1E88E5" // デフォルト青
+                                            }
+                                            onChange={(hex) => {
+                                                // 既存の右目色を取得（なければデフォルト赤）
+                                                const rightColor = selectedItemId.match(/\(right eye color: (#[0-9A-Fa-f]{6})\)/)
+                                                    ? selectedItemId.match(/\(right eye color: (#[0-9A-Fa-f]{6})\)/)![1]
+                                                    : "#E53935";
+                                                onSelect(`heterochromia, (right eye color: ${rightColor}), (left eye color: ${hex})`);
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
